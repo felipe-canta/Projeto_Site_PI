@@ -33,6 +33,22 @@
                 transform: scale(1);
             }
         }
+
+        .add-to-cart:hover {
+            animation: buttonHover 0.3s ease-in-out;
+        }
+
+        @keyframes buttonHover {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -43,15 +59,20 @@
                 { image: 'https://placehold.co/200x200', name: 'Produto 3', brand: 'Puma', price: 300, quantity: 1 },
                 { image: 'https://placehold.co/200x200', name: 'Produto 4', brand: 'Mizuno', price: 400, quantity: 1 },
                 { image: 'https://placehold.co/200x200', name: 'Produto 5', brand: 'Nike', price: 500, quantity: 1 },
-                { image: 'https://placehold.co/200x200', name: 'Produto 6', brand: 'Adidas', price: 600, quantity: 1 }
+                { image: 'https://placehold.co/200x200', name: 'Produto 6', brand: 'Adidas', price: 600, quantity: 1 },
+                { image: 'https://placehold.co/200x200', name: 'Produto 7', brand: 'Reebok', price: 700, quantity: 1 },
+                { image: 'https://placehold.co/200x200', name: 'Produto 8', brand: 'Under Armour', price: 800, quantity: 1 },
+                { image: 'https://placehold.co/200x200', name: 'Produto 9', brand: 'New Balance', price: 900, quantity: 1 }
             ];
 
             function updateCart() {
                 const cartContainer = document.getElementById('cart-items');
                 cartContainer.innerHTML = '';
                 let totalItems = 0;
+                let totalPrice = 0;
                 cart.forEach((item, index) => {
                     totalItems += item.quantity;
+                    totalPrice += item.price * item.quantity;
                     const cartItem = document.createElement('div');
                     cartItem.className = 'flex items-center mb-4';
                     cartItem.innerHTML = `
@@ -59,7 +80,7 @@
                         <div class="flex-1">
                             <p class="text-gray-800">${item.name}</p>
                             <p class="text-gray-600">Quantidade: ${item.quantity}</p>
-                            <p class="text-gray-600">R$${item.price * item.quantity}</p>
+                            <p class="text-gray-600">Valor total: R$${item.price * item.quantity}</p>
                         </div>
                         <div class="flex items-center">
                             <button class="decrease-quantity bg-gray-200 text-gray-600 px-2 py-1 rounded" data-index="${index}">-</button>
@@ -69,6 +90,14 @@
                     `;
                     cartContainer.appendChild(cartItem);
                 });
+
+                const totalContainer = document.createElement('div');
+                totalContainer.className = 'flex justify-between items-center mt-4';
+                totalContainer.innerHTML = `
+                    <span class="text-xl font-bold">Total:</span>
+                    <span class="text-xl font-bold">R$${totalPrice}</span>
+                `;
+                cartContainer.appendChild(totalContainer);
 
                 document.getElementById('cart-count').innerText = totalItems;
 
@@ -130,7 +159,6 @@
                         }
                         updateCart();
 
-                        // Show added to cart message
                         const message = document.createElement('div');
                         message.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded fade-in';
                         message.innerText = 'Produto adicionado ao carrinho!';
@@ -139,7 +167,6 @@
                             message.remove();
                         }, 2000);
 
-                        // Add animation to button
                         this.classList.add('button-clicked');
                         setTimeout(() => {
                             this.classList.remove('button-clicked');
@@ -189,7 +216,7 @@
                 <span id="cart-count" class="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 text-xs">0</span>
                 <div id="cart-popup" class="hidden absolute right-0 mt-2 w-80 bg-white border border-gray-200 shadow-lg p-4">
                     <h2 class="text-xl font-bold mb-4">Carrinho</h2>
-                    <div id="cart-items"
+                    <div id="cart-items">
                     </div>
                 </div>
             </button>
@@ -210,6 +237,9 @@
                     <li><button class="filter-brand text-gray-600" data-brand="Adidas">Adidas</button></li>
                     <li><button class="filter-brand text-gray-600" data-brand="Puma">Puma</button></li>
                     <li><button class="filter-brand text-gray-600" data-brand="Mizuno">Mizuno</button></li>
+                    <li><button class="filter-brand text-gray-600" data-brand="Reebok">Reebok</button></li>
+                    <li><button class="filter-brand text-gray-600" data-brand="Under Armour">Under Armour</button></li>
+                    <li><button class="filter-brand text-gray-600" data-brand="New Balance">New Balance</button></li>
                 </ul>
                 <h2 class="text-lg font-bold mt-8 mb-4">Filtrar por</h2>
                 <div class="mb-4">
@@ -235,10 +265,12 @@
                     <span class="text-gray-600">18 produtos</span>
                 </div>
                 <div id="product-list" class="grid grid-cols-3 gap-4">
-                    <!-- Product items will be added here -->
                 </div>
             </section>
         </div>
     </main>
+    <footer class="bg-gray-200 text-center p-4 mt-8">
+        <p class="text-gray-600">&copy; 2023 Loja do Matias. Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>
