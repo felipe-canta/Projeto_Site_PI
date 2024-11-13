@@ -5,17 +5,17 @@
             margin: 0;
             padding: 0;
         }
-        }
+        
         .icons svg {
             width: 32px;
             height: 32px;
             margin: 0 16px;
             vertical-align: middle;
-            fill: #000; /* Cor dos ícones */
+            fill: #000; 
         }
         
         .icons a:hover svg {
-            fill: #860404; /* Cor ao passar o mouse */
+            fill: #860404; 
         }
         
         .top-right {
@@ -73,15 +73,22 @@
             font-size: 18px;
         }
         .main-content {
+            display: grid;
+            grid-template-columns: auto auto; /* Define duas colunas */
+            gap: 20px; /* Espaçamento entre as imagens */
+            justify-content: center; /* Centraliza o grid */
+        }
+        
+        .column {
             display: flex;
-            justify-content: center;
-            padding: 20px;
+            flex-direction: column;
+            gap: 20px; /* Espaçamento entre as duas imagens na coluna */
         }
-        .main-content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
+        
+        .image-container img {
+            width: 100%; /* Faz com que a imagem ocupe 100% da largura do contêiner */
+            height: auto; /* Mantém a proporção */
+            border-radius: 10px; /* Adiciona bordas arredondadas */
         }
-        .main-content .image-container {
-            margin: 0 10px;
-        }
+        
+        
