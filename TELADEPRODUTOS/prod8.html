@@ -57,10 +57,10 @@
    document.addEventListener('DOMContentLoaded', function () {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const images = [
-                'https://acdn.mitiendanube.com/stores/001/038/770/products/strangelove-nike-sb-dunk-low-ct2552-800-release-date-price_2048x20481-ba71cc3e16b6d8702016349470376722-1024-1024.jpg',
-                'https://cdn.awsli.com.br/600x1000/1100/1100536/produto/50622548/d757055356.jpg',
-                'https://acdn.mitiendanube.com/stores/003/259/692/products/3-81d14d0087ff3f520217208128675889-1024-1024.png',
-                'https://acdn.mitiendanube.com/stores/001/226/115/products/tenis-strangelove-x-dunk-low-sb-valentines-day-71-9b014fc57032fa7ec415986685891761-1024-1024.jpeg'
+                'https://imgcentauro-a.akamaihd.net/1366x1366/99173151.jpg',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThQf9A2hIlupcm7Hj0_zbzWAYWHJGjUW4yQw&s',
+                'https://t-static.dafiti.com.br/EQghjz1E1FhvFLn97TzWQ8qiEFM=/fit-in/325x471/static.dafiti.com.br/p/adidas-originals-t%C3%AAnis-adidas-originals-samba-og-branco-9068-4040793-2-zoom.jpg',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHrvs5OjkPFxvNLOlKc4VOE0XM1EB-1pHZsA&s'
             ];
             let currentImageIndex = 0;
 
@@ -171,7 +171,7 @@
                     const product = {
                         image: images[0],
                         name: this.dataset.name,
-                        price: 2500.00,
+                        price: 900.00,
                         quantity: 1
                     };
                     const existingProductIndex = cart.findIndex(item => item.name === product.name);
@@ -254,21 +254,20 @@
        </button>
       </div>
       <div class="flex mt-4 space-x-2">
-            <img alt="Thumbnail 1" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://acdn.mitiendanube.com/stores/001/038/770/products/strangelove-nike-sb-dunk-low-ct2552-800-release-date-price_2048x20481-ba71cc3e16b6d8702016349470376722-1024-1024.jpg" width="600"/>
-            <img alt="Thumbnail 2" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://cdn.awsli.com.br/600x1000/1100/1100536/produto/50622548/d757055356.jpg" width="600"/>
-            <img alt="Thumbnail 3" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://acdn.mitiendanube.com/stores/003/259/692/products/3-81d14d0087ff3f520217208128675889-1024-1024.png" width="600"/>
-            <img alt="Thumbnail 4" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://acdn.mitiendanube.com/stores/001/226/115/products/tenis-strangelove-x-dunk-low-sb-valentines-day-71-9b014fc57032fa7ec415986685891761-1024-1024.jpeg" width="600"/>
+            <img alt="Thumbnail 1" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://imgcentauro-a.akamaihd.net/1366x1366/99173151.jpg" width="600"/>
+            <img alt="Thumbnail 2" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThQf9A2hIlupcm7Hj0_zbzWAYWHJGjUW4yQw&s" width="600"/>
+            <img alt="Thumbnail 3" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://t-static.dafiti.com.br/EQghjz1E1FhvFLn97TzWQ8qiEFM=/fit-in/325x471/static.dafiti.com.br/p/adidas-originals-t%C3%AAnis-adidas-originals-samba-og-branco-9068-4040793-2-zoom.jpg" width="600"/>
+            <img alt="Thumbnail 4" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnOO9LQjnaNReX8N-SmVwcANxSwpEFDO6niQ&s" width="600"/>
         </div>        
      </div>
      <div class="w-1/2 pl-6">
       <h1 class="text-3xl font-bold text-gray-800">
-        Nike SB Dunk Low Strangelove
+        Adidas Samba
       </h1>
       <p class="text-gray-600 mt-2">
-        O Nike SB Dunk Low Strangelove é um tênis exclusivo inspirado no Dia dos Namorados, com tons de rosa, vermelho e branco, detalhes em veludo e camurça premium. Sua estética romântica e design artístico o tornam um item de colecionador.      </p>
-      <div class="mt-4">
+        O Adidas Samba é um tênis icônico projetado originalmente para futebol indoor, com cabedal em couro premium, biqueira em camurça e solado de borracha. Seu design clássico o tornou um símbolo da moda urbana.      <div class="mt-4">
        <span class="text-2xl font-bold text-gray-800">
-        R$ 2500,00
+        R$ 900,00
        </span>
       </div>
       <div class="mt-4">
@@ -297,7 +296,7 @@
        </select>
       </div>
       <div class="mt-6">
-       <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" data-image="https://acdn.mitiendanube.com/stores/001/038/770/products/strangelove-nike-sb-dunk-low-ct2552-800-release-date-price_2048x20481-ba71cc3e16b6d8702016349470376722-1024-1024.jpg" data-name="Dunk Low SB Strangelove" data-price="2500.00">
+       <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" data-image="https://imgcentauro-a.akamaihd.net/1366x1366/99173151.jpg" data-name="Adidas Samba" data-price="900.00">
         Adicionar ao Carrinho
        </button>
       </div>
