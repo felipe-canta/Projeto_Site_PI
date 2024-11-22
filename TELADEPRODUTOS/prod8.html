@@ -1,0 +1,313 @@
+<html>
+ <head>
+  <title>
+   Produto Individual - Loja do Matias
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;display=swap" rel="stylesheet"/>
+  <style>
+   .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .button-clicked {
+            animation: buttonClicked 0.3s ease-in-out;
+        }
+
+        @keyframes buttonClicked {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .add-to-cart:hover {
+            animation: buttonHover 0.3s ease-in-out;
+        }
+
+        @keyframes buttonHover {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+  </style>
+  <script>
+   document.addEventListener('DOMContentLoaded', function () {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const images = [
+                'https://imgcentauro-a.akamaihd.net/1366x1366/99173151.jpg',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThQf9A2hIlupcm7Hj0_zbzWAYWHJGjUW4yQw&s',
+                'https://t-static.dafiti.com.br/EQghjz1E1FhvFLn97TzWQ8qiEFM=/fit-in/325x471/static.dafiti.com.br/p/adidas-originals-t%C3%AAnis-adidas-originals-samba-og-branco-9068-4040793-2-zoom.jpg',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHrvs5OjkPFxvNLOlKc4VOE0XM1EB-1pHZsA&s'
+            ];
+            let currentImageIndex = 0;
+
+            function updateCart() {
+                const cartContainer = document.getElementById('cart-items');
+                cartContainer.innerHTML = '';
+                let totalItems = 0;
+                let totalPrice = 0;
+                cart.forEach((item, index) => {
+                    totalItems += item.quantity;
+                    totalPrice += item.price * item.quantity;
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'flex items-center mb-4';
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="Imagem do produto" class="w-16 h-16 object-cover mr-4">
+                        <div class="flex-1">
+                            <p class="text-gray-800">${item.name}</p>
+                            <p class="text-gray-600">Quantidade: ${item.quantity}</p>
+                            <p class="text-gray-600">Valor total: R$${item.price * item.quantity}</p>
+                        </div>
+                        <div class="flex items-center">
+                            <button class="decrease-quantity bg-gray-200 text-gray-600 px-2 py-1 rounded" data-index="${index}">-</button>
+                            <span class="mx-2">${item.quantity}</span>
+                            <button class="increase-quantity bg-gray-200 text-gray-600 px-2 py-1 rounded" data-index="${index}">+</button>
+                        </div>
+                    `;
+                    cartContainer.appendChild(cartItem);
+                });
+
+                const totalContainer = document.createElement('div');
+                totalContainer.className = 'flex justify-between items-center mt-4';
+                totalContainer.innerHTML = `
+                    <span class="text-xl font-bold">Total:</span>
+                    <span class="text-xl font-bold">R$${totalPrice}</span>
+                `;
+                cartContainer.appendChild(totalContainer);
+
+                document.getElementById('cart-count').innerText = totalItems;
+
+                document.querySelectorAll('.increase-quantity').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const index = this.dataset.index;
+                        cart[index].quantity++;
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateCart();
+                    });
+                });
+
+                document.querySelectorAll('.decrease-quantity').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const index = this.dataset.index;
+                        if (cart[index].quantity > 1) {
+                            cart[index].quantity--;
+                        } else {
+                            cart.splice(index, 1);
+                        }
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateCart();
+                    });
+                });
+            }
+
+            function updateImage() {
+                const mainImage = document.getElementById('main-image');
+                mainImage.src = images[currentImageIndex];
+            }
+
+            document.getElementById('prev-image').addEventListener('click', function () {
+                if (currentImageIndex > 0) {
+                    currentImageIndex--;
+                } else {
+                    currentImageIndex = images.length - 1;
+                }
+                updateImage();
+            });
+
+            document.getElementById('next-image').addEventListener('click', function () {
+                if (currentImageIndex < images.length - 1) {
+                    currentImageIndex++;
+                } else {
+                    currentImageIndex = 0;
+                }
+                updateImage();
+            });
+
+            document.querySelectorAll('.thumbnail').forEach((thumbnail, index) => {
+                thumbnail.addEventListener('click', function () {
+                    currentImageIndex = index;
+                    updateImage();
+                });
+            });
+
+            document.getElementById('cart-icon').addEventListener('click', function (event) {
+                event.stopPropagation();
+                const cartSection = document.getElementById('cart-popup');
+                cartSection.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', function (event) {
+                const cartSection = document.getElementById('cart-popup');
+                if (!cartSection.contains(event.target) && !document.getElementById('cart-icon').contains(event.target)) {
+                    cartSection.classList.add('hidden');
+                }
+            });
+
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function () {
+                    const product = {
+                        image: images[0],
+                        name: this.dataset.name,
+                        price: 900.00,
+                        quantity: 1
+                    };
+                    const existingProductIndex = cart.findIndex(item => item.name === product.name);
+                    if (existingProductIndex > -1) {
+                        cart[existingProductIndex].quantity++;
+                    } else {
+                        cart.push(product);
+                    }
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCart();
+
+                    const message = document.createElement('div');
+                    message.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded fade-in';
+                    message.innerText = 'Produto adicionado ao carrinho!';
+                    document.body.appendChild(message);
+                    setTimeout(() => {
+                        message.remove();
+                    }, 2000);
+
+                    this.classList.add('button-clicked');
+                    setTimeout(() => {
+                        this.classList.remove('button-clicked');
+                    }, 300);
+                });
+            });
+
+            updateCart();
+            updateImage();
+        });
+  </script>
+ </head>
+ <body class="bg-white text-gray-800">
+  <header class="flex items-center justify-between p-4 border-b border-gray-200" style="background: linear-gradient(to bottom, lightblue, white 80%); height: 200px;">
+   <div class="flex items-center">
+    <div class="text-5xl font-bold text-black" style="font-family: 'Great Vibes', cursive;">
+     Loja do Matias
+    </div>
+   </div>
+   <div class="flex items-center space-x-4">
+    <button class="text-black">
+     <i class="fas fa-home">
+     </i>
+    </button>
+    <button class="text-black">
+     <i class="fas fa-user">
+     </i>
+     Entrar
+    </button>
+    <button class="text-black relative" id="cart-icon">
+     <i class="fas fa-shopping-bag">
+     </i>
+     <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 text-xs" id="cart-count">
+      0
+     </span>
+     <div class="hidden absolute right-0 mt-2 w-80 bg-white border border-gray-200 shadow-lg p-4" id="cart-popup">
+      <h2 class="text-xl font-bold mb-4">
+       Carrinho
+      </h2>
+      <div id="cart-items">
+      </div>
+     </div>
+    </button>
+    <button class="text-black">
+     <i class="fas fa-bars">
+     </i>
+    </button>
+   </div>
+  </header>
+  <main class="container mx-auto mt-6 px-6">
+   <div class="bg-white p-6 shadow rounded">
+    <div class="flex">
+     <div class="w-1/2">
+      <div class="relative">
+       <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 text-gray-600 px-2 py-1 rounded" id="prev-image">
+        ‹
+       </button>
+       <img alt="Imagem do produto" class="w-full h-auto object-cover rounded" height="400" id="main-image" src="https://images.stockx.com/images/Nike-Dunk-Low-CPFM-Pure-Platinum-Product.jpg?fit=fill&amp;bg=FFFFFF&amp;w=700&amp;h=500&amp;fm=webp&amp;auto=compress&amp;q=90&amp;dpr=2&amp;trim=color&amp;updated_at=1609445367" width="600"/>
+       <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 text-gray-600 px-2 py-1 rounded" id="next-image">
+        ›
+       </button>
+      </div>
+      <div class="flex mt-4 space-x-2">
+            <img alt="Thumbnail 1" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://imgcentauro-a.akamaihd.net/1366x1366/99173151.jpg" width="600"/>
+            <img alt="Thumbnail 2" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThQf9A2hIlupcm7Hj0_zbzWAYWHJGjUW4yQw&s" width="600"/>
+            <img alt="Thumbnail 3" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://t-static.dafiti.com.br/EQghjz1E1FhvFLn97TzWQ8qiEFM=/fit-in/325x471/static.dafiti.com.br/p/adidas-originals-t%C3%AAnis-adidas-originals-samba-og-branco-9068-4040793-2-zoom.jpg" width="600"/>
+            <img alt="Thumbnail 4" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnOO9LQjnaNReX8N-SmVwcANxSwpEFDO6niQ&s" width="600"/>
+        </div>        
+     </div>
+     <div class="w-1/2 pl-6">
+      <h1 class="text-3xl font-bold text-gray-800">
+        Adidas Samba
+      </h1>
+      <p class="text-gray-600 mt-2">
+        O Adidas Samba é um tênis icônico projetado originalmente para futebol indoor, com cabedal em couro premium, biqueira em camurça e solado de borracha. Seu design clássico o tornou um símbolo da moda urbana.      <div class="mt-4">
+       <span class="text-2xl font-bold text-gray-800">
+        R$ 900,00
+       </span>
+      </div>
+      <div class="mt-4">
+       <label class="block text-gray-700">
+        Tamanho
+       </label>
+       <select class="border p-2 w-full">
+        <option value="">
+         Selecione o Tamanho
+        </option>
+        <option value="38">
+         38
+        </option>
+        <option value="39">
+         39
+        </option>
+        <option value="40">
+         40
+        </option>
+        <option value="41">
+         41
+        </option>
+        <option value="42">
+         42
+        </option>
+       </select>
+      </div>
+      <div class="mt-6">
+       <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" data-image="https://imgcentauro-a.akamaihd.net/1366x1366/99173151.jpg" data-name="Adidas Samba" data-price="900.00">
+        Adicionar ao Carrinho
+       </button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </main>
+  <footer class="bg-gray-200 text-center p-4 mt-8">
+   <p class="text-gray-600">
+    © 2023 Loja do Matias. Todos os direitos reservados.
+   </p>
+  </footer>
+ </body>
+</html>
