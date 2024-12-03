@@ -1,0 +1,313 @@
+<html>
+ <head>
+  <title>
+   Produto Individual - Loja do Matias
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;display=swap" rel="stylesheet"/>
+  <style>
+   .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .button-clicked {
+            animation: buttonClicked 0.3s ease-in-out;
+        }
+
+        @keyframes buttonClicked {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .add-to-cart:hover {
+            animation: buttonHover 0.3s ease-in-out;
+        }
+
+        @keyframes buttonHover {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+  </style>
+  <script>
+   document.addEventListener('DOMContentLoaded', function () {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const images = [
+                'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa/global/397255/02/sv01/fnd/BRA/w/1000/h/1000/fmt/png',
+                'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa/global/397255/02/mod01/fnd/BRA/w/1000/h/1000/fmt/png',
+                'data:image/jpeg;base64,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',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq4K00nZ69qxuTDoYKj1LEe-7atrhZVewPZQ&s'
+            ];
+            let currentImageIndex = 0;
+
+            function updateCart() {
+                const cartContainer = document.getElementById('cart-items');
+                cartContainer.innerHTML = '';
+                let totalItems = 0;
+                let totalPrice = 0;
+                cart.forEach((item, index) => {
+                    totalItems += item.quantity;
+                    totalPrice += item.price * item.quantity;
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'flex items-center mb-4';
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="Imagem do produto" class="w-16 h-16 object-cover mr-4">
+                        <div class="flex-1">
+                            <p class="text-gray-800">${item.name}</p>
+                            <p class="text-gray-600">Quantidade: ${item.quantity}</p>
+                            <p class="text-gray-600">Valor total: R$${item.price * item.quantity}</p>
+                        </div>
+                        <div class="flex items-center">
+                            <button class="decrease-quantity bg-gray-200 text-gray-600 px-2 py-1 rounded" data-index="${index}">-</button>
+                            <span class="mx-2">${item.quantity}</span>
+                            <button class="increase-quantity bg-gray-200 text-gray-600 px-2 py-1 rounded" data-index="${index}">+</button>
+                        </div>
+                    `;
+                    cartContainer.appendChild(cartItem);
+                });
+
+                const totalContainer = document.createElement('div');
+                totalContainer.className = 'flex justify-between items-center mt-4';
+                totalContainer.innerHTML = `
+                    <span class="text-xl font-bold">Total:</span>
+                    <span class="text-xl font-bold">R$${totalPrice}</span>
+                `;
+                cartContainer.appendChild(totalContainer);
+
+                document.getElementById('cart-count').innerText = totalItems;
+
+                document.querySelectorAll('.increase-quantity').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const index = this.dataset.index;
+                        cart[index].quantity++;
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateCart();
+                    });
+                });
+
+                document.querySelectorAll('.decrease-quantity').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const index = this.dataset.index;
+                        if (cart[index].quantity > 1) {
+                            cart[index].quantity--;
+                        } else {
+                            cart.splice(index, 1);
+                        }
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateCart();
+                    });
+                });
+            }
+
+            function updateImage() {
+                const mainImage = document.getElementById('main-image');
+                mainImage.src = images[currentImageIndex];
+            }
+
+            document.getElementById('prev-image').addEventListener('click', function () {
+                if (currentImageIndex > 0) {
+                    currentImageIndex--;
+                } else {
+                    currentImageIndex = images.length - 1;
+                }
+                updateImage();
+            });
+
+            document.getElementById('next-image').addEventListener('click', function () {
+                if (currentImageIndex < images.length - 1) {
+                    currentImageIndex++;
+                } else {
+                    currentImageIndex = 0;
+                }
+                updateImage();
+            });
+
+            document.querySelectorAll('.thumbnail').forEach((thumbnail, index) => {
+                thumbnail.addEventListener('click', function () {
+                    currentImageIndex = index;
+                    updateImage();
+                });
+            });
+
+            document.getElementById('cart-icon').addEventListener('click', function (event) {
+                event.stopPropagation();
+                const cartSection = document.getElementById('cart-popup');
+                cartSection.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', function (event) {
+                const cartSection = document.getElementById('cart-popup');
+                if (!cartSection.contains(event.target) && !document.getElementById('cart-icon').contains(event.target)) {
+                    cartSection.classList.add('hidden');
+                }
+            });
+
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function () {
+                    const product = {
+                        image: images[0],
+                        name: this.dataset.name,
+                        price: 200.00,
+                        quantity: 1
+                    };
+                    const existingProductIndex = cart.findIndex(item => item.name === product.name);
+                    if (existingProductIndex > -1) {
+                        cart[existingProductIndex].quantity++;
+                    } else {
+                        cart.push(product);
+                    }
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCart();
+
+                    const message = document.createElement('div');
+                    message.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded fade-in';
+                    message.innerText = 'Produto adicionado ao carrinho!';
+                    document.body.appendChild(message);
+                    setTimeout(() => {
+                        message.remove();
+                    }, 2000);
+
+                    this.classList.add('button-clicked');
+                    setTimeout(() => {
+                        this.classList.remove('button-clicked');
+                    }, 300);
+                });
+            });
+
+            updateCart();
+            updateImage();
+        });
+  </script>
+ </head>
+ <body class="bg-white text-gray-800">
+  <header class="flex items-center justify-between p-4 border-b border-gray-200" style="background: linear-gradient(to bottom, lightblue, white 80%); height: 200px;">
+   <div class="flex items-center">
+    <div class="text-5xl font-bold text-black" style="font-family: 'Great Vibes', cursive;">
+     Loja do Matias
+    </div>
+   </div>
+   <div class="flex items-center space-x-4">
+    <button class="text-black">
+     <i class="fas fa-home">
+     </i>
+    </button>
+    <button class="text-black">
+     <i class="fas fa-user">
+     </i>
+     Entrar
+    </button>
+    <button class="text-black relative" id="cart-icon">
+     <i class="fas fa-shopping-bag">
+     </i>
+     <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 text-xs" id="cart-count">
+      0
+     </span>
+     <div class="hidden absolute right-0 mt-2 w-80 bg-white border border-gray-200 shadow-lg p-4" id="cart-popup">
+      <h2 class="text-xl font-bold mb-4">
+       Carrinho
+      </h2>
+      <div id="cart-items">
+      </div>
+     </div>
+    </button>
+    <button class="text-black">
+     <i class="fas fa-bars">
+     </i>
+    </button>
+   </div>
+  </header>
+  <main class="container mx-auto mt-6 px-6">
+   <div class="bg-white p-6 shadow rounded">
+    <div class="flex">
+     <div class="w-1/2">
+      <div class="relative">
+       <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 text-gray-600 px-2 py-1 rounded" id="prev-image">
+        ‹
+       </button>
+       <img alt="Imagem do produto" class="w-full h-auto object-cover rounded" height="400" id="main-image" src="https://images.stockx.com/images/Nike-Dunk-Low-CPFM-Pure-Platinum-Product.jpg?fit=fill&amp;bg=FFFFFF&amp;w=700&amp;h=500&amp;fm=webp&amp;auto=compress&amp;q=90&amp;dpr=2&amp;trim=color&amp;updated_at=1609445367" width="600"/>
+       <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 text-gray-600 px-2 py-1 rounded" id="next-image">
+        ›
+       </button>
+      </div>
+      <div class="flex mt-4 space-x-2">
+            <img alt="Thumbnail 1" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa/global/397255/02/sv01/fnd/BRA/w/1000/h/1000/fmt/png" width="600"/>
+            <img alt="Thumbnail 2" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa/global/397255/02/mod01/fnd/BRA/w/1000/h/1000/fmt/png" width="600"/>
+            <img alt="Thumbnail 3" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="data:image/jpeg;base64,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" width="600"/>
+            <img alt="Thumbnail 4" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq4K00nZ69qxuTDoYKj1LEe-7atrhZVewPZQ&s" width="600"/>
+        </div>        
+     </div>
+     <div class="w-1/2 pl-6">
+      <h1 class="text-3xl font-bold text-gray-800">
+        Puma Suede
+      </h1>
+      <p class="text-gray-600 mt-2">
+        O Puma Suede é um clássico atemporal com cabedal em camurça macia, solado de borracha durável e design minimalista. Popularizado por skatistas e na cultura urbana, combina estilo e conforto.      <div class="mt-4">
+       <span class="text-2xl font-bold text-gray-800">
+        R$ 200,00
+       </span>
+      </div>
+      <div class="mt-4">
+       <label class="block text-gray-700">
+        Tamanho
+       </label>
+       <select class="border p-2 w-full">
+        <option value="">
+         Selecione o Tamanho
+        </option>
+        <option value="38">
+         38
+        </option>
+        <option value="39">
+         39
+        </option>
+        <option value="40">
+         40
+        </option>
+        <option value="41">
+         41
+        </option>
+        <option value="42">
+         42
+        </option>
+       </select>
+      </div>
+      <div class="mt-6">
+       <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" data-image="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa/global/397255/02/sv01/fnd/BRA/w/1000/h/1000/fmt/png" data-name="Puma Suede" data-price="200.00">
+        Adicionar ao Carrinho
+       </button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </main>
+  <footer class="bg-gray-200 text-center p-4 mt-8">
+   <p class="text-gray-600">
+    © 2023 Loja do Matias. Todos os direitos reservados.
+   </p>
+  </footer>
+ </body>
+</html>
