@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagar com PayPal</title>
+    <title>Pagar com Cartão</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body {
@@ -18,8 +18,6 @@
             left: 20px;
         }
     </style>
-    <!-- PayPal SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID_HERE&currency=BRL"></script>
 </head>
 <body class="bg-gray-100 text-gray-800">
     <div class="logo">
@@ -58,8 +56,36 @@
             <!-- Os itens do carrinho serão carregados aqui dinamicamente pelo JS -->
         </div>
 
-        <!-- Botão do PayPal -->
-        <div id="paypal-button-container"></div>
+        <!-- Formulário para informações do Cartão -->
+        <div class="mb-6">
+            <h3 class="text-xl font-semibold">Informações do Cartão</h3>
+            <form id="payment-form" class="space-y-4">
+                <div>
+                    <label for="card-name" class="block text-gray-600">Nome no Cartão</label>
+                    <input type="text" id="card-name" name="card-name" class="w-full px-4 py-2 border rounded" required>
+                </div>
+                <div>
+                    <label for="card-number" class="block text-gray-600">Número do Cartão</label>
+                    <input type="text" id="card-number" name="card-number" class="w-full px-4 py-2 border rounded" required>
+                </div>
+                <div class="flex space-x-4">
+                    <div class="flex-1">
+                        <label for="expiry" class="block text-gray-600">Data de Validade</label>
+                        <input type="text" id="expiry" name="expiry" placeholder="MM/AA" class="w-full px-4 py-2 border rounded" required>
+                    </div>
+                    <div class="flex-1">
+                        <label for="cvv" class="block text-gray-600">CVV</label>
+                        <input type="text" id="cvv" name="cvv" class="w-full px-4 py-2 border rounded" required>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Botões de Pagamento -->
+        <div class="flex justify-between">
+            <div id="paypal-button-container"></div>
+            <button id="credit-card-button" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Pagar com Cartão</button>
+        </div>
     </main>
 
     <footer class="bg-gray-200 text-center p-4 mt-8">
@@ -118,6 +144,23 @@
                     alert('Ocorreu um erro no processamento do pagamento.');
                 }
             }).render('#paypal-button-container');
+
+            // Lógica para o pagamento com cartão
+            document.getElementById('credit-card-button').addEventListener('click', function () {
+                const cardName = document.getElementById('card-name').value;
+                const cardNumber = document.getElementById('card-number').value;
+                const expiry = document.getElementById('expiry').value;
+                const cvv = document.getElementById('cvv').value;
+
+                // Validar se todos os campos estão preenchidos
+                if (cardName && cardNumber && expiry && cvv) {
+                    // Simula o pagamento e redireciona
+                    alert('Pagamento realizado com cartão! Obrigado, ' + cardName);
+                    window.location.href = 'obrigado.html';  // Redireciona após o pagamento
+                } else {
+                    alert('Por favor, preencha todos os campos.');
+                }
+            });
         });
     </script>
 </body>
