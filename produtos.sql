@@ -1,4 +1,4 @@
--- Cria o banco de dados da loja
+-- Criação do banco de dados da loja
 CREATE DATABASE LojaOnline;
 USE LojaOnline;
 
@@ -23,15 +23,23 @@ CREATE TABLE Produtos (
     FOREIGN KEY (categoria_id) REFERENCES Categorias(id)
 );
 
--- Tabela para gerenciar os usuários da loja
+-- Criação da tabela de usuários com novos campos
 CREATE TABLE Usuarios (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    senha VARCHAR(255) NOT NULL, -- a senha deve ser criptografada para segurança
-    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data de criação do usuário
-    ativo BOOLEAN DEFAULT TRUE -- Para soft delete
+    id INT PRIMARY KEY AUTO_INCREMENT,           -- Identificador único e chave primária
+    nome VARCHAR(100) NOT NULL,                  -- Nome completo do usuário
+    email VARCHAR(100) NOT NULL UNIQUE,          -- Email único do usuário (nome de usuário para login)
+    senha VARCHAR(255) NOT NULL,                 -- Senha do usuário
+    telefone VARCHAR(20),                        -- Telefone do usuário
+    endereco VARCHAR(255),                       -- Endereço do usuário
+    cidade VARCHAR(100),                         -- Cidade de residência
+    estado VARCHAR(100),                         -- Estado de residência
+    cep VARCHAR(10),                             -- Código postal
+    data_nascimento DATE,                        -- Data de nascimento (opcional)
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Data e hora do registro
 );
+
+-- Garantindo um índice único no email para evitar duplicidades
+ALTER TABLE Usuarios ADD UNIQUE (email);
 
 -- Tabela para armazenar os endereços dos usuários
 CREATE TABLE Enderecos (
@@ -100,8 +108,9 @@ CREATE TABLE Pagamentos (
 CREATE TABLE LogsAtividade (
     id INT PRIMARY KEY AUTO_INCREMENT,
     usuario_id INT NOT NULL,
-    acao VARCHAR(255) NOT NULL,
-    endereco_ip VARCHAR(45), -- IP de origem
-    data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    acao VARCHAR(255) NOT NULL,              -- Descrição da ação realizada
+    endereco_ip VARCHAR(45),                 -- IP de origem
+    data TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data e hora do log
     FOREIGN KEY (usuario_id) REFERENCES Usuarios(id) ON DELETE CASCADE
 );
+
