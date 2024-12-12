@@ -8,10 +8,36 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="../css/signin.css" />
+    <link rel="stylesheet" href="signin.css" />
     <title>Singin</title>
+    <style>
+      .arrow-left {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 24px;
+        color: black;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .arrow-left:hover {
+        color: gray;
+      }
+
+      .arrow-left i {
+        margin-right: 8px;
+      }
+    </style>
   </head>
   <body>
+    <!-- Botão de seta para a esquerda -->
+    <div class="arrow-left" onclick="voltarPagina()">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+    </div>
+
     <div class="container">
       <div class="card">
         <h1>Entrar</h1>
@@ -19,18 +45,20 @@
         <div id="msgError"></div>
 
         <div class="label-float">
-          <input type="text" id="usuario" paceholder="" required />
+          <input type="text" id="usuario" placeholder="" required />
           <label id="userLabel" for="usuario">Usuario</label>
         </div>
 
         <div class="label-float">
-          <input type="password" id="senha" paceholder="" required />
+          <input type="password" id="senha" placeholder="" required />
           <label id="senhaLabel" for="senha">Senha</label>
           <i class="fa fa-eye" aria-hidden="true"></i>
         </div>
 
         <div class="justify-center">
-          <button onclick="entrar()">Entrar</button>
+          <a href="index.html">
+            <button onclick="entrar()">Entrar</button>
+          </a>
         </div>
 
         <div class="justify-center">
@@ -46,6 +74,11 @@
       </div>
     </div>
 
+    <script>
+      function voltarPagina() {
+        window.history.back(); // Redireciona para a página anterior
+      }
+    </script>
     <script src="../js/signin.js"></script>
   </body>
 </html>

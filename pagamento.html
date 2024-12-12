@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagar com PayPal</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .logo {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: black;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+    </style>
+    <!-- PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID_HERE&currency=BRL"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="logo">
+        Loja do Matias
+    </div>
+    <!-- Botões de Navegação -->
+    <div class="absolute top-4 right-4 flex space-x-4">
+        <a href="index.html" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Início</a>
+        <a href="javascript:history.back()" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 flex items-center">
+            <i class="fas fa-arrow-left mr-2"></i> Voltar
+        </a>
+    </div>
+
+    <!-- Header com Gradiente de Cima para Baixo -->
+    <header class="bg-gradient-to-b from-blue-200 to-blue-50 text-black p-8 text-center">
+        <h1 class="text-3xl font-bold">Pagamento</h1>
+    </header>
+
+    <main class="max-w-4xl mx-auto mt-8 p-4 bg-white shadow-md rounded">
+        <h2 class="text-2xl font-bold mb-4">Finalizar Compra</h2>
+
+        <!-- Resumo do Carrinho -->
+        <div class="mt-4 mb-6">
+            <div class="flex justify-between text-lg">
+                <p>Subtotal:</p>
+                <p id="subtotal">R$ 0,00</p>
+            </div>
+            <div class="flex justify-between text-lg font-bold">
+                <p>Total:</p>
+                <p id="total">R$ 0,00</p>
+            </div>
+        </div>
+
+        <!-- Exibir itens do carrinho -->
+        <div id="cart-items" class="mb-6">
+            <!-- Os itens do carrinho serão carregados aqui dinamicamente pelo JS -->
+        </div>
+
+        <!-- Botão do PayPal -->
+        <div id="paypal-button-container"></div>
+    </main>
+
+    <footer class="bg-gray-200 text-center p-4 mt-8">
+        <p class="text-gray-600">&copy; 2023 Loja do Matias. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Recuperar o total do carrinho e os itens armazenados no localStorage
+            const totalPrice = parseFloat(localStorage.getItem('totalPrice') || 0);
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Exibir os totais na página
+            document.getElementById('total').innerText = `R$ ${totalPrice.toFixed(2)}`;
+            document.getElementById('subtotal').innerText = `R$ ${totalPrice.toFixed(2)}`;
+
+            // Exibir os itens do carrinho na página de pagamento
+            const cartItemsContainer = document.getElementById('cart-items');
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'flex justify-between items-center mb-4';
+                cartItem.innerHTML = `
+                    <div class="flex-1">
+                        <p class="text-gray-800">${item.name} (x${item.quantity})</p>
+                        <p class="text-gray-600">R$ ${item.price.toFixed(2)}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold">R$ ${(item.price * item.quantity).toFixed(2)}</p>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+
+            // Configurar o botão do PayPal
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: totalPrice.toFixed(2),
+                                currency_code: 'BRL'
+                            }
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        // Exibe informações de pagamento
+                        alert('Pagamento realizado com sucesso! Obrigado, ' + details.payer.name.given_name);
+                        // Redirecionar para a página de confirmação
+                        window.location.href = 'obrigado.html';
+                    });
+                },
+                onError: function (err) {
+                    console.error(err);
+                    alert('Ocorreu um erro no processamento do pagamento.');
+                }
+            }).render('#paypal-button-container');
+        });
+    </script>
+</body>
+</html>

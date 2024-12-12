@@ -8,10 +8,36 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="../css/signup.css" />
-    <title>Singup</title>
+    <link rel="stylesheet" href="signup.css" />
+    <title>Signup</title>
+    <style>
+      .arrow-left {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 24px;
+        color: black;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .arrow-left:hover {
+        color: gray;
+      }
+
+      .arrow-left i {
+        margin-right: 8px;
+      }
+    </style>
   </head>
   <body>
+    <!-- Botão de seta para a esquerda -->
+    <div class="arrow-left" onclick="voltarPagina()">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+    </div>
+
     <div class="container">
       <div class="card">
         <h1>Cadastrar</h1>
@@ -37,9 +63,9 @@
 
         <div class="label-float">
           <input type="password" id="confirmSenha" placeholder=" " required />
-          <label id="labelConfirmSenha" for="confirmSenha"
-            >Confirmar Senha</label
-          >
+          <label id="labelConfirmSenha" for="confirmSenha">
+            Confirmar Senha
+          </label>
           <i id="verConfirmSenha" class="fa fa-eye" aria-hidden="true"></i>
         </div>
 
@@ -49,6 +75,11 @@
       </div>
     </div>
 
+    <script>
+      function voltarPagina() {
+        window.history.back(); // Volta para a página anterior
+      }
+    </script>
     <script src="../js/signup.js"></script>
   </body>
 </html>
