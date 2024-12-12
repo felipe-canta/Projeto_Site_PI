@@ -54,15 +54,15 @@
         document.addEventListener('DOMContentLoaded', function () {
             const cart = [];
             const products = [
-                { image: 'https://placehold.co/200x200', name: 'Produto 1', brand: 'Nike', price: 100, quantity: 1 },
-                { image: 'https://placehold.co/200x200', name: 'Produto 2', brand: 'Adidas', price: 200, quantity: 1 },
-                { image: 'https://placehold.co/200x200', name: 'Produto 3', brand: 'Puma', price: 300, quantity: 1 },
-                { image: 'https://placehold.co/200x200', name: 'Produto 4', brand: 'Mizuno', price: 400, quantity: 1 },
-                { image: 'https://placehold.co/200x200', name: 'Produto 5', brand: 'Nike', price: 500, quantity: 1 },
-                { image: 'https://placehold.co/200x200', name: 'Produto 6', brand: 'Adidas', price: 600, quantity: 1 },
-                { image: 'https://placehold.co/200x200', name: 'Produto 7', brand: 'Reebok', price: 700, quantity: 1 },
-                { image: 'https://placehold.co/200x200', name: 'Produto 8', brand: 'Under Armour', price: 800, quantity: 1 },
-                { image: 'https://placehold.co/200x200', name: 'Produto 9', brand: 'New Balance', price: 900, quantity: 1 }
+                { image: 'https://images.stockx.com/images/Nike-Dunk-Low-CPFM-Pure-Platinum-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1609445367', name: 'Nike Dunk Low X CPFM Pure Platinum', brand: 'Nike', price: 4000, quantity: 1 },
+                { image: 'https://images.stockx.com/images/Nike-SB-Dunk-Low-Ben-Jerrys-Chunky-Dunky-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1607043246', name: 'Nike Dunk Low Ben & Jerry', brand: 'Nike', price: 1000, quantity: 1 },
+                { image: 'https://http2.mlstatic.com/D_NQ_NP_740872-MPE79042410403_092024-O.webp', name: 'New Balance Denim', brand: 'New Balance', price: 800, quantity: 1 },
+                { image: 'https://acdn.mitiendanube.com/stores/001/038/770/products/strangelove-nike-sb-dunk-low-ct2552-800-release-date-price_2048x20481-ba71cc3e16b6d8702016349470376722-1024-1024.jpg', name: 'Nike SB Dunk Low Strangelove', brand: 'Nike', price: 2500, quantity: 1 },
+                { image: 'https://i.ebayimg.com/images/g/fEEAAOSwdclkGWcl/s-l1200.jpg', name: 'Nike SB Dunk Low Grateful Dead Yellow', brand: 'Nike', price: 3600, quantity: 1 },
+                { image: 'https://dcdn.mitiendanube.com/stores/003/150/300/products/adidas-toalhinha-0d38113e2bf34e088717314637256652-1024-1024.jpg', name: 'South Park x adidas Campus 80s Towelie', brand: 'Adidas', price: 700, quantity: 1 },
+                { image: 'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/8943df93a9e94f81adb7af63011856c7_9366/Tenis_Campus_00s_Preto_HQ6638_01_standard.jpg', name: 'Adidas Campus 00', brand: 'Adidas', price: 400, quantity: 1 },
+                { image: 'https://imgcentauro-a.akamaihd.net/1366x1366/99173151.jpg', name: 'Adidas Samba', brand: 'Adidas', price: 900, quantity: 1 },
+                { image: 'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa/global/397255/02/sv01/fnd/BRA/w/1000/h/1000/fmt/png', name: 'Puma Suede', brand: 'Puma', price: 200, quantity: 1 }
             ];
 
             function updateCart() {
