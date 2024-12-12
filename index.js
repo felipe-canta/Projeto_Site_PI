@@ -1,54 +1,54 @@
 const express = require('express');
+const path = require('path');
 const mysql = require('mysql');
-const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Configuração do Body Parser
-app.use(bodyParser.urlencoded({ extended: true }));
+// Middleware para interpretar os dados do corpo da requisição
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-// Configuração da Conexão com o Banco de Dados
+// Configurar arquivos estáticos
+app.use(express.static(path.join(__dirname)));
+
+// Rota inicial
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'cadastre.html'));
+});
+
+// Configuração do MySQL
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'root', // Usuário do MySQL
-  password: '', // Senha do MySQL
-  database: 'MeuBanco' // Nome do banco
+  user: 'root',
+  password: '', // Altere conforme necessário
+  database: 'lojatenis',
 });
 
-// Conectando ao Banco de Dados
-db.connect((err) => {
+db.connect(err => {
   if (err) {
-    console.error('Erro ao conectar ao banco de dados:', err);
+    console.error('Erro ao conectar ao MySQL:', err);
     return;
   }
-  console.log('Conectado ao banco de dados MySQL!');
+  console.log('Conectado ao MySQL!');
 });
 
-// Rota para Processar o Cadastro
+// Rota para processar o formulário
 app.post('/cadastrar', (req, res) => {
-  const { nome, usuario, senha, confirmSenha } = req.body;
+  const { nome, usuario, senha } = req.body;
 
-  // Verifica se as senhas coincidem
-  if (senha !== confirmSenha) {
-    return res.send('Erro: As senhas não coincidem!');
-  }
-
-  // Insere os dados no banco de dados
-  const query = 'INSERT INTO Clientes (Nome, Email, Senha) VALUES (?, ?, ?)';
-  db.query(query, [nome, usuario, senha], (err, result) => {
+  const sql = 'INSERT INTO Clientes (Nome, Email, Senha) VALUES (?, ?, ?)';
+  db.query(sql, [nome, usuario, senha], (err, result) => {
     if (err) {
-      console.error('Erro ao inserir dados:', err);
-      res.send('Erro ao cadastrar cliente.');
-      return;
+      console.error('Erro ao inserir no MySQL:', err);
+      res.status(500).send('Erro ao cadastrar usuário.');
+    } else {
+      res.send('Usuário cadastrado com sucesso!');
     }
-
-    console.log('Cliente cadastrado com sucesso!', result);
-    res.send('Cliente cadastrado com sucesso!');
   });
 });
 
-// Inicia o Servidor
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
+// Inicia o servidor
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
