@@ -66,61 +66,71 @@
             ];
 
             function updateCart() {
-                const cartContainer = document.getElementById('cart-items');
-                cartContainer.innerHTML = '';
-                let totalItems = 0;
-                let totalPrice = 0;
-                cart.forEach((item, index) => {
-                    totalItems += item.quantity;
-                    totalPrice += item.price * item.quantity;
-                    const cartItem = document.createElement('div');
-                    cartItem.className = 'flex items-center mb-4';
-                    cartItem.innerHTML = `
-                        <img src="${item.image}" alt="Imagem do produto" class="w-16 h-16 object-cover mr-4">
-                        <div class="flex-1">
-                            <p class="text-gray-800">${item.name}</p>
-                            <p class="text-gray-600">Quantidade: ${item.quantity}</p>
-                            <p class="text-gray-600">Valor total: R$${item.price * item.quantity}</p>
-                        </div>
-                        <div class="flex items-center">
-                            <button class="decrease-quantity bg-gray-200 text-gray-600 px-2 py-1 rounded" data-index="${index}">-</button>
-                            <span class="mx-2">${item.quantity}</span>
-                            <button class="increase-quantity bg-gray-200 text-gray-600 px-2 py-1 rounded" data-index="${index}">+</button>
-                        </div>
-                    `;
-                    cartContainer.appendChild(cartItem);
-                });
+    const cartContainer = document.getElementById('cart-items');
+    cartContainer.innerHTML = '';
+    let totalItems = 0;
+    let totalPrice = 0;
+    cart.forEach((item, index) => {
+        totalItems += item.quantity;
+        totalPrice += item.price * item.quantity;
+        const cartItem = document.createElement('div');
+        cartItem.className = 'flex items-center mb-4';
+        cartItem.innerHTML = `
+            <img src="${item.image}" alt="Imagem do produto" class="w-16 h-16 object-cover mr-4">
+            <div class="flex-1">
+                <p class="text-gray-800">${item.name}</p>
+                <p class="text-gray-600">Quantidade: ${item.quantity}</p>
+                <p class="text-gray-600">Valor total: R$${item.price * item.quantity}</p>
+            </div>
+            <div class="flex items-center">
+                <button class="decrease-quantity bg-gray-200 text-gray-600 px-2 py-1 rounded" data-index="${index}">-</button>
+                <span class="mx-2">${item.quantity}</span>
+                <button class="increase-quantity bg-gray-200 text-gray-600 px-2 py-1 rounded" data-index="${index}">+</button>
+            </div>
+        `;
+        cartContainer.appendChild(cartItem);
+    });
 
-                const totalContainer = document.createElement('div');
-                totalContainer.className = 'flex justify-between items-center mt-4';
-                totalContainer.innerHTML = `
-                    <span class="text-xl font-bold">Total:</span>
-                    <span class="text-xl font-bold">R$${totalPrice}</span>
-                `;
-                cartContainer.appendChild(totalContainer);
+    const totalContainer = document.createElement('div');
+    totalContainer.className = 'flex justify-between items-center mt-4';
+    totalContainer.innerHTML = `
+        <span class="text-xl font-bold">Total:</span>
+        <span class="text-xl font-bold">R$${totalPrice}</span>
+    `;
+    cartContainer.appendChild(totalContainer);
 
-                document.getElementById('cart-count').innerText = totalItems;
+    // Adicionando o botão "Finalizar Compra"
+    const checkoutButton = document.createElement('button');
+    checkoutButton.className = 'bg-blue-600 text-white px-6 py-2 mt-4 rounded';
+    checkoutButton.innerText = 'Finalizar Compra';
+    checkoutButton.onclick = function() {
+        window.location.href = 'carrinho.html'; // Redireciona para carrinho.html
+    };
+    cartContainer.appendChild(checkoutButton);
 
-                document.querySelectorAll('.increase-quantity').forEach(button => {
-                    button.addEventListener('click', function () {
-                        const index = this.dataset.index;
-                        cart[index].quantity++;
-                        updateCart();
-                    });
-                });
+    document.getElementById('cart-count').innerText = totalItems;
 
-                document.querySelectorAll('.decrease-quantity').forEach(button => {
-                    button.addEventListener('click', function () {
-                        const index = this.dataset.index;
-                        if (cart[index].quantity > 1) {
-                            cart[index].quantity--;
-                        } else {
-                            cart.splice(index, 1);
-                        }
-                        updateCart();
-                    });
-                });
+    document.querySelectorAll('.increase-quantity').forEach(button => {
+        button.addEventListener('click', function () {
+            const index = this.dataset.index;
+            cart[index].quantity++;
+            updateCart();
+        });
+    });
+
+    document.querySelectorAll('.decrease-quantity').forEach(button => {
+        button.addEventListener('click', function () {
+            const index = this.dataset.index;
+            if (cart[index].quantity > 1) {
+                cart[index].quantity--;
+            } else {
+                cart.splice(index, 1);
             }
+            updateCart();
+        });
+    });
+}
+
 
             function updateProducts(filterBrand = '') {
                 const productContainer = document.getElementById('product-list');
@@ -133,11 +143,13 @@
                         const productItem = document.createElement('div');
                         productItem.className = 'border p-4';
                         productItem.innerHTML = `
+                        <a href="prod${products.indexOf(product) + 1}.html">
                             <img alt="Imagem do produto" class="w-full mt-4" src="${product.image}" />
                             <p class="mt-2">${product.name}</p>
                             <p class="text-gray-500">${product.brand}</p>
                             <p class="text-gray-600">R$${product.price}</p>
                             <button class="add-to-cart bg-blue-600 text-white px-4 py-2 mt-2 rounded" data-image="${product.image}" data-name="${product.name}" data-price="${product.price}">Adicionar ao Carrinho</button>
+                            
                         `;
                         productContainer.appendChild(productItem);
                     }
@@ -202,25 +214,31 @@
             updateProducts();
         });
     </script>
-</head>
-<body class="bg-white text-gray-800">
+</head><body class="bg-white text-gray-800">
     <header class="flex items-center justify-between p-4 border-b border-gray-200" style="background: linear-gradient(to bottom, lightblue, white 80%); height: 200px;">
         <div class="flex items-center">
             <div class="text-5xl font-bold text-black" style="font-family: 'Great Vibes', cursive;">Loja do Matias</div>
         </div>
         <div class="flex items-center space-x-4">
-            <button class="text-black"><i class="fas fa-home"></i></button>
-            <button class="text-black"><i class="fas fa-user"></i> Entrar</button>
+            <a href="index.html" class="text-black">
+                <i class="fas fa-home"></i>
+            </a>
+
+            <a href="index1.html" class="text-black">
+                <i class="fas fa-user"></i> Entrar
+            </a>
+
+      
             <button class="text-black relative" id="cart-icon">
                 <i class="fas fa-shopping-bag"></i>
                 <span id="cart-count" class="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 text-xs">0</span>
                 <div id="cart-popup" class="hidden absolute right-0 mt-2 w-80 bg-white border border-gray-200 shadow-lg p-4">
+                    
                     <h2 class="text-xl font-bold mb-4">Carrinho</h2>
                     <div id="cart-items">
                     </div>
                 </div>
             </button>
-            <button class="text-black"><i class="fas fa-bars"></i></button>
         </div>
     </header>
     <main class="p-8">

@@ -97,6 +97,13 @@
                     <span class="text-xl font-bold">R$${totalPrice}</span>
                 `;
                 cartContainer.appendChild(totalContainer);
+                 const checkoutButton = document.createElement('button');
+    checkoutButton.className = 'bg-blue-600 text-white px-6 py-2 mt-4 rounded';
+    checkoutButton.innerText = 'Finalizar Compra';
+    checkoutButton.onclick = function() {
+        window.location.href = 'carrinho.html'; // Redireciona para carrinho.html
+    };
+    cartContainer.appendChild(checkoutButton);
 
                 document.getElementById('cart-count').innerText = totalItems;
 
@@ -216,9 +223,9 @@
      </i>
     </button>
     <button class="text-black">
-     <i class="fas fa-user">
-     </i>
-     Entrar
+        <a href="signin.html" class="text-black">
+            <i class="fas fa-user"></i> Entrar
+        </a>
     </button>
     <button class="text-black relative" id="cart-icon">
      <i class="fas fa-shopping-bag">
@@ -234,9 +241,9 @@
       </div>
      </div>
     </button>
-    <button class="text-black">
-     <i class="fas fa-bars">
-     </i>
+   <button class="text-black" onclick="window.location.href='product.html';">
+    
+    <i class="fas fa-arrow-left"></i>
     </button>
    </div>
   </header>

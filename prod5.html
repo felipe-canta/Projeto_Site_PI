@@ -57,10 +57,10 @@
    document.addEventListener('DOMContentLoaded', function () {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const images = [
-                'https://imgcentauro-a.akamaihd.net/1366x1366/99173151.jpg',
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThQf9A2hIlupcm7Hj0_zbzWAYWHJGjUW4yQw&s',
-                'https://t-static.dafiti.com.br/EQghjz1E1FhvFLn97TzWQ8qiEFM=/fit-in/325x471/static.dafiti.com.br/p/adidas-originals-t%C3%AAnis-adidas-originals-samba-og-branco-9068-4040793-2-zoom.jpg',
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHrvs5OjkPFxvNLOlKc4VOE0XM1EB-1pHZsA&s'
+                'https://i.ebayimg.com/images/g/fEEAAOSwdclkGWcl/s-l1200.jpg',
+                'https://cdn.sanity.io/images/c1chvb1i/production/2309a5201b62345450aa955a43430541b0c72997-1100x735.jpg',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmkZiUAx-W2vPTrz-o2yyIGtAoX65BDzIuyQ&s',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLDTLYVoNX_dqoUXf-y5_sPuszt0UrTj7Fdw&s'
             ];
             let currentImageIndex = 0;
 
@@ -97,6 +97,13 @@
                     <span class="text-xl font-bold">R$${totalPrice}</span>
                 `;
                 cartContainer.appendChild(totalContainer);
+                 const checkoutButton = document.createElement('button');
+    checkoutButton.className = 'bg-blue-600 text-white px-6 py-2 mt-4 rounded';
+    checkoutButton.innerText = 'Finalizar Compra';
+    checkoutButton.onclick = function() {
+        window.location.href = 'carrinho.html'; // Redireciona para carrinho.html
+    };
+    cartContainer.appendChild(checkoutButton);
 
                 document.getElementById('cart-count').innerText = totalItems;
 
@@ -171,7 +178,7 @@
                     const product = {
                         image: images[0],
                         name: this.dataset.name,
-                        price: 900.00,
+                        price: 3600.00,
                         quantity: 1
                     };
                     const existingProductIndex = cart.findIndex(item => item.name === product.name);
@@ -216,9 +223,9 @@
      </i>
     </button>
     <button class="text-black">
-     <i class="fas fa-user">
-     </i>
-     Entrar
+        <a href="signin.html" class="text-black">
+            <i class="fas fa-user"></i> Entrar
+        </a>
     </button>
     <button class="text-black relative" id="cart-icon">
      <i class="fas fa-shopping-bag">
@@ -234,9 +241,9 @@
       </div>
      </div>
     </button>
-    <button class="text-black">
-     <i class="fas fa-bars">
-     </i>
+   <button class="text-black" onclick="window.location.href='product.html';">
+    
+    <i class="fas fa-arrow-left"></i>
     </button>
    </div>
   </header>
@@ -254,20 +261,21 @@
        </button>
       </div>
       <div class="flex mt-4 space-x-2">
-            <img alt="Thumbnail 1" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://imgcentauro-a.akamaihd.net/1366x1366/99173151.jpg" width="600"/>
-            <img alt="Thumbnail 2" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThQf9A2hIlupcm7Hj0_zbzWAYWHJGjUW4yQw&s" width="600"/>
-            <img alt="Thumbnail 3" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://t-static.dafiti.com.br/EQghjz1E1FhvFLn97TzWQ8qiEFM=/fit-in/325x471/static.dafiti.com.br/p/adidas-originals-t%C3%AAnis-adidas-originals-samba-og-branco-9068-4040793-2-zoom.jpg" width="600"/>
-            <img alt="Thumbnail 4" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnOO9LQjnaNReX8N-SmVwcANxSwpEFDO6niQ&s" width="600"/>
+            <img alt="Thumbnail 1" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://i.ebayimg.com/images/g/fEEAAOSwdclkGWcl/s-l1200.jpg" width="600"/>
+            <img alt="Thumbnail 2" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://cdn.sanity.io/images/c1chvb1i/production/2309a5201b62345450aa955a43430541b0c72997-1100x735.jpg" width="600"/>
+            <img alt="Thumbnail 3" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmkZiUAx-W2vPTrz-o2yyIGtAoX65BDzIuyQ&s" width="600"/>
+            <img alt="Thumbnail 4" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLDTLYVoNX_dqoUXf-y5_sPuszt0UrTj7Fdw&s" width="600"/>
         </div>        
      </div>
      <div class="w-1/2 pl-6">
       <h1 class="text-3xl font-bold text-gray-800">
-        Adidas Samba
+        Nike SB Dunk Low Grateful Dead Yellow
       </h1>
       <p class="text-gray-600 mt-2">
-        O Adidas Samba é um tênis icônico projetado originalmente para futebol indoor, com cabedal em couro premium, biqueira em camurça e solado de borracha. Seu design clássico o tornou um símbolo da moda urbana.      <div class="mt-4">
+        O **Nike SB Dunk Low Grateful Dead Yellow** é inspirado nos icônicos ursos da banda Grateful Dead, com pelúcia amarela, detalhes em camurça e swoosh serrilhado. O design único celebra a vibe psicodélica e descontraída da banda.      </p>
+      <div class="mt-4">
        <span class="text-2xl font-bold text-gray-800">
-        R$ 900,00
+        R$ 3600,00
        </span>
       </div>
       <div class="mt-4">
@@ -296,7 +304,7 @@
        </select>
       </div>
       <div class="mt-6">
-       <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" data-image="https://imgcentauro-a.akamaihd.net/1366x1366/99173151.jpg" data-name="Adidas Samba" data-price="900.00">
+       <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" data-image="https://i.ebayimg.com/images/g/fEEAAOSwdclkGWcl/s-l1200.jpg" data-name="Nike SB Dunk Low Grateful Dead Yellow" data-price="3600.00">
         Adicionar ao Carrinho
        </button>
       </div>

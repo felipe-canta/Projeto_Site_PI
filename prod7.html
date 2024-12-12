@@ -57,10 +57,10 @@
    document.addEventListener('DOMContentLoaded', function () {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const images = [
-                'https://dcdn.mitiendanube.com/stores/003/150/300/products/adidas-toalhinha-0d38113e2bf34e088717314637256652-1024-1024.jpg',
-                'https://droper-media.us-southeast-1.linodeobjects.com/3092022182053995.webp',
-                'https://droper-media.us-southeast-1.linodeobjects.com/309202218211211.webp',
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8X4lxbiI490r-L5F5SHuf1ksUCjKRhMHg_g&s'
+                'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/8943df93a9e94f81adb7af63011856c7_9366/Tenis_Campus_00s_Preto_HQ6638_01_standard.jpg',
+                'https://juicysneakers.com.br/cdn/shop/files/CAMPUS-00S-1-JUICYSNEAKERS_3291ad7c-660d-4e2c-bc3e-409037942a13.webp?v=1716304738',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBwMQuNPCDWAn6P0IGtc52a-TTwMk2fseZhA&s',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnOO9LQjnaNReX8N-SmVwcANxSwpEFDO6niQ&s'
             ];
             let currentImageIndex = 0;
 
@@ -97,6 +97,13 @@
                     <span class="text-xl font-bold">R$${totalPrice}</span>
                 `;
                 cartContainer.appendChild(totalContainer);
+                 const checkoutButton = document.createElement('button');
+    checkoutButton.className = 'bg-blue-600 text-white px-6 py-2 mt-4 rounded';
+    checkoutButton.innerText = 'Finalizar Compra';
+    checkoutButton.onclick = function() {
+        window.location.href = 'carrinho.html'; // Redireciona para carrinho.html
+    };
+    cartContainer.appendChild(checkoutButton);
 
                 document.getElementById('cart-count').innerText = totalItems;
 
@@ -171,7 +178,7 @@
                     const product = {
                         image: images[0],
                         name: this.dataset.name,
-                        price: 700.00,
+                        price: 400.00,
                         quantity: 1
                     };
                     const existingProductIndex = cart.findIndex(item => item.name === product.name);
@@ -216,9 +223,9 @@
      </i>
     </button>
     <button class="text-black">
-     <i class="fas fa-user">
-     </i>
-     Entrar
+        <a href="signin.html" class="text-black">
+            <i class="fas fa-user"></i> Entrar
+        </a>
     </button>
     <button class="text-black relative" id="cart-icon">
      <i class="fas fa-shopping-bag">
@@ -234,9 +241,9 @@
       </div>
      </div>
     </button>
-    <button class="text-black">
-     <i class="fas fa-bars">
-     </i>
+   <button class="text-black" onclick="window.location.href='product.html';">
+    
+    <i class="fas fa-arrow-left"></i>
     </button>
    </div>
   </header>
@@ -254,21 +261,20 @@
        </button>
       </div>
       <div class="flex mt-4 space-x-2">
-            <img alt="Thumbnail 1" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://dcdn.mitiendanube.com/stores/003/150/300/products/adidas-toalhinha-0d38113e2bf34e088717314637256652-1024-1024.jpg" width="600"/>
-            <img alt="Thumbnail 2" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://droper-media.us-southeast-1.linodeobjects.com/3092022182053995.webp" width="600"/>
-            <img alt="Thumbnail 3" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://droper-media.us-southeast-1.linodeobjects.com/309202218211211.webp" width="600"/>
-            <img alt="Thumbnail 4" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8X4lxbiI490r-L5F5SHuf1ksUCjKRhMHg_g&s" width="600"/>
+            <img alt="Thumbnail 1" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/8943df93a9e94f81adb7af63011856c7_9366/Tenis_Campus_00s_Preto_HQ6638_01_standard.jpg" width="600"/>
+            <img alt="Thumbnail 2" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://juicysneakers.com.br/cdn/shop/files/CAMPUS-00S-1-JUICYSNEAKERS_3291ad7c-660d-4e2c-bc3e-409037942a13.webp?v=1716304738" width="600"/>
+            <img alt="Thumbnail 3" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBwMQuNPCDWAn6P0IGtc52a-TTwMk2fseZhA&s" width="600"/>
+            <img alt="Thumbnail 4" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnOO9LQjnaNReX8N-SmVwcANxSwpEFDO6niQ&s" width="600"/>
         </div>        
      </div>
      <div class="w-1/2 pl-6">
       <h1 class="text-3xl font-bold text-gray-800">
-        South Park x adidas Campus 80s Towelie
+        Adidas Campus 00s
       </h1>
       <p class="text-gray-600 mt-2">
-        O South Park x Adidas Campus 80s Towelie é inspirado no personagem Toalhinha, com cabedal em toalha roxa e olhos que mudam de cor com a luz UV. O design descontraído traz referências divertidas da série.    </p>
-      <div class="mt-4">
+        O Adidas Campus é um clássico retrô dos anos 80, com design minimalista em camurça premium, solado em borracha e estética casual. Ícone da cultura urbana e do skate, combina estilo e versatilidade.      <div class="mt-4">
        <span class="text-2xl font-bold text-gray-800">
-        R$ 700,00
+        R$ 400,00
        </span>
       </div>
       <div class="mt-4">
@@ -297,7 +303,7 @@
        </select>
       </div>
       <div class="mt-6">
-       <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" data-image="https://dcdn.mitiendanube.com/stores/003/150/300/products/adidas-toalhinha-0d38113e2bf34e088717314637256652-1024-1024.jpg" data-name="South Park x adidas Campus 80s Towelie" data-price="700.00">
+       <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" data-image="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/8943df93a9e94f81adb7af63011856c7_9366/Tenis_Campus_00s_Preto_HQ6638_01_standard.jpg" data-name="Adidas Campus 00s" data-price="400.00">
         Adicionar ao Carrinho
        </button>
       </div>

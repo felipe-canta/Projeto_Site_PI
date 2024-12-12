@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .logo {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: black;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="logo">
+        Loja do Matias
+    </div>
+    <!-- Botões de Navegação -->
+    <div class="absolute top-4 right-4 flex space-x-4">
+        <a href="index.html" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Início</a>
+        <a href="product.html" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 flex items-center">
+            <i class="fas fa-arrow-left mr-2"></i> Voltar
+        </a>
+    </div>
+
+    <!-- Header com Gradiente de Cima para Baixo -->
+    <header class="bg-gradient-to-b from-blue-200 to-blue-50 text-black p-8 text-center">
+        <h1 class="text-3xl font-bold">Finalizar Compra</h1>
+    </header>
+
+    <main class="max-w-4xl mx-auto mt-8 p-4 bg-white shadow-md rounded">
+        <h2 class="text-2xl font-bold mb-4">Itens no Carrinho</h2>
+        <div id="cart-items" class="space-y-4">
+            <!-- Os itens do carrinho serão carregados aqui dinamicamente pelo JS -->
+            <div class="flex items-center justify-between border-b pb-4">
+                <div>
+                    <h3 class="text-lg font-semibold">Produto Exemplo</h3>
+                    <p class="text-gray-600">Tamanho: 42</p>
+                    <p class="text-gray-600">Quantidade: 1</p>
+                </div>
+                <p class="text-lg font-bold">R$ 150,00</p>
+            </div>
+        </div>
+
+        <div class="mt-6 border-t pt-4">
+            <h2 class="text-xl font-bold mb-4">Resumo da Compra</h2>
+            <div class="flex justify-between text-lg">
+                <p>Subtotal:</p>
+                <p id="subtotal">R$ 150,00</p>
+            </div>
+            <div class="flex justify-between text-lg">
+                <p>Frete:</p>
+                <p id="frete">R$ 20,00</p>
+            </div>
+            <div class="flex justify-between text-lg font-bold">
+                <p>Total:</p>
+                <p id="total">R$ 170,00</p>
+            </div>
+        </div>
+
+        <form action="#" method="POST" class="mt-8 space-y-4">
+            <h2 class="text-xl font-bold">Informações para Entrega</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="name" class="block text-gray-700">Nome Completo</label>
+                    <input type="text" id="name" name="name" class="w-full border p-2 rounded" required>
+                </div>
+                <div>
+                    <label for="email" class="block text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" class="w-full border p-2 rounded" required>
+                </div>
+            </div>
+            <div>
+                <label for="address" class="block text-gray-700">Endereço</label>
+                <input type="text" id="address" name="address" class="w-full border p-2 rounded" required>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="city" class="block text-gray-700">Cidade</label>
+                    <input type="text" id="city" name="city" class="w-full border p-2 rounded" required>
+                </div>
+                <div>
+                    <label for="state" class="block text-gray-700">Estado</label>
+                    <input type="text" id="state" name="state" class="w-full border p-2 rounded" required>
+                </div>
+                <div>
+                    <label for="zip" class="block text-gray-700">CEP</label>
+                    <input type="text" id="zip" name="zip" class="w-full border p-2 rounded" required>
+                </div>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded text-lg font-bold hover:bg-blue-700">Finalizar Compra</button>
+        </form>
+    </main>
+
+    <footer class="bg-gray-200 text-center p-4 mt-8">
+        <p class="text-gray-600">&copy; 2023 Loja do Matias. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

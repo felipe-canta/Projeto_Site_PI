@@ -57,10 +57,10 @@
    document.addEventListener('DOMContentLoaded', function () {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const images = [
-                'https://images.stockx.com/images/Nike-Dunk-Low-CPFM-Pure-Platinum-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1609445367',
-                'https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fwp-content%2Fblogs.dir%2F6%2Ffiles%2F2020%2F11%2Fnike-cactus-plant-flea-market-cpfm-collaboration-dunk-low-sneakers-swarovski-crystals-rhinestones-white-colorway-release-date-1.jpg?q=90&w=1400&cbr=1&fit=max',
-                'https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fwp-content%2Fblogs.dir%2F6%2Ffiles%2F2020%2F11%2Fnike-cactus-plant-flea-market-cpfm-collaboration-dunk-low-sneakers-swarovski-crystals-rhinestones-white-colorway-release-date-2.jpg?q=90&w=1400&cbr=1&fit=max',
-                'https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fwp-content%2Fblogs.dir%2F6%2Ffiles%2F2020%2F11%2Fnike-cactus-plant-flea-market-cpfm-collaboration-dunk-low-sneakers-swarovski-crystals-rhinestones-white-colorway-release-date-5.jpg?q=90&w=1400&cbr=1&fit=max'
+                'https://images.stockx.com/images/Nike-SB-Dunk-Low-Ben-Jerrys-Chunky-Dunky-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1607043246',
+                'https://legitcheck.app/wp-content/uploads/2020/06/Chunky-Dunky-Real-Vs-Fake.jpeg',
+                'https://storage.googleapis.com/shy-pub/84601/1700892553413_SKU-3939_0.jpg',
+                'https://trainersfactory.co.uk/cdn/shop/products/75_272d012a-08ff-4845-8e62-e11f774a8986.jpg?v=1676111354'
             ];
             let currentImageIndex = 0;
 
@@ -97,6 +97,13 @@
                     <span class="text-xl font-bold">R$${totalPrice}</span>
                 `;
                 cartContainer.appendChild(totalContainer);
+                 const checkoutButton = document.createElement('button');
+    checkoutButton.className = 'bg-blue-600 text-white px-6 py-2 mt-4 rounded';
+    checkoutButton.innerText = 'Finalizar Compra';
+    checkoutButton.onclick = function() {
+        window.location.href = 'carrinho.html'; // Redireciona para carrinho.html
+    };
+    cartContainer.appendChild(checkoutButton);
 
                 document.getElementById('cart-count').innerText = totalItems;
 
@@ -171,7 +178,7 @@
                     const product = {
                         image: images[0],
                         name: this.dataset.name,
-                        price: 4000.00,
+                        price: 1000.00,
                         quantity: 1
                     };
                     const existingProductIndex = cart.findIndex(item => item.name === product.name);
@@ -216,9 +223,9 @@
      </i>
     </button>
     <button class="text-black">
-     <i class="fas fa-user">
-     </i>
-     Entrar
+        <a href="signin.html" class="text-black">
+            <i class="fas fa-user"></i> Entrar
+        </a>
     </button>
     <button class="text-black relative" id="cart-icon">
      <i class="fas fa-shopping-bag">
@@ -234,9 +241,8 @@
       </div>
      </div>
     </button>
-    <button class="text-black">
-     <i class="fas fa-bars">
-     </i>
+   <button class="text-black" onclick="window.location.href='product.html';">
+    <i class="fas fa-arrow-left"></i>
     </button>
    </div>
   </header>
@@ -254,22 +260,22 @@
        </button>
       </div>
       <div class="flex mt-4 space-x-2">
-       <img alt="Thumbnail 1" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://images.stockx.com/images/Nike-Dunk-Low-CPFM-Pure-Platinum-Product.jpg?fit=fill&amp;bg=FFFFFF&amp;w=700&amp;h=500&amp;fm=webp&amp;auto=compress&amp;q=90&amp;dpr=2&amp;trim=color&amp;updated_at=1609445367" width="600"/>
-       <img alt="Thumbnail 2" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fwp-content%2Fblogs.dir%2F6%2Ffiles%2F2020%2F11%2Fnike-cactus-plant-flea-market-cpfm-collaboration-dunk-low-sneakers-swarovski-crystals-rhinestones-white-colorway-release-date-1.jpg?q=90&amp;w=1400&amp;cbr=1&amp;fit=max" width="600"/>
-       <img alt="Thumbnail 3" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fwp-content%2Fblogs.dir%2F6%2Ffiles%2F2020%2F11%2Fnike-cactus-plant-flea-market-cpfm-collaboration-dunk-low-sneakers-swarovski-crystals-rhinestones-white-colorway-release-date-2.jpg?q=90&amp;w=1400&amp;cbr=1&amp;fit=max" width="600"/>
-       <img alt="Thumbnail 4" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fwp-content%2Fblogs.dir%2F6%2Ffiles%2F2020%2F11%2Fnike-cactus-plant-flea-market-cpfm-collaboration-dunk-low-sneakers-swarovski-crystals-rhinestones-white-colorway-release-date-5.jpg?q=90&amp;w=1400&amp;cbr=1&amp;fit=max" width="600"/>
-      </div>
+            <img alt="Thumbnail 1" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://images.stockx.com/images/Nike-SB-Dunk-Low-Ben-Jerrys-Chunky-Dunky-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1607043246" width="600"/>
+            <img alt="Thumbnail 2" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://legitcheck.app/wp-content/uploads/2020/06/Chunky-Dunky-Real-Vs-Fake.jpeg" width="600"/>
+            <img alt="Thumbnail 3" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://storage.googleapis.com/shy-pub/84601/1700892553413_SKU-3939_0.jpg" width="600"/>
+            <img alt="Thumbnail 4" class="thumbnail w-16 h-16 object-cover cursor-pointer rounded" height="400" src="https://trainersfactory.co.uk/cdn/shop/products/75_272d012a-08ff-4845-8e62-e11f774a8986.jpg?v=1676111354" width="600"/>
+        </div>        
      </div>
      <div class="w-1/2 pl-6">
       <h1 class="text-3xl font-bold text-gray-800">
-        Nike Dunk Low X CPFM Pure Platinum
+        Nike Dunk Low Ben & Jerry's 
       </h1>
       <p class="text-gray-600 mt-2">
-        O Nike Dunk Low Cactus Plant Flea Market "Pure Platinum" é uma edição colaborativa que une o clássico design do Dunk Low com a criatividade excêntrica da Cactus Plant Flea Market. 
+        O Nike SB Dunk Low Ben & Jerry's Chunky Dunky é uma colaboração ousada inspirada no famoso sorvete da marca Ben & Jerry's. Ele se destaca por seu design colorido, com estampas que imitam vacas, céu azul e sorvete derretido, além de ser altamente colecionável. 
       </p>
       <div class="mt-4">
        <span class="text-2xl font-bold text-gray-800">
-        R$ 4000,00
+        R$ 1000,00
        </span>
       </div>
       <div class="mt-4">
@@ -298,7 +304,8 @@
        </select>
       </div>
       <div class="mt-6">
-       <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" data-image="https://images.stockx.com/images/Nike-Dunk-Low-CPFM-Pure-Platinum-Product.jpg?fit=fill&amp;bg=FFFFFF&amp;w=700&amp;h=500&amp;fm=webp&amp;auto=compress&amp;q=90&amp;dpr=2&amp;trim=color&amp;updated_at=1609445367" data-name="Dunk Low X CPFM Pure Platinum" data-price="4000.00">
+       <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" data-image="https://images.stockx.com/images/Nike-SB-Dunk-Low-Ben-Jerrys-Chunky-Dunky-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1607043246" data-name="Nike Dunk Low Ben & Jerry's
+       " data-price="1000.00">
         Adicionar ao Carrinho
        </button>
       </div>
