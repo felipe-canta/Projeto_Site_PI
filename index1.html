@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entre em Contato</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles1.css">
+</head>
+<body>
+    <!-- Botão de Voltar no canto superior esquerdo -->
+    <button onclick="history.back()" class="back-button">
+        <i class="fas fa-arrow-left"></i> Voltar
+    </button>
+
+    <div class="container">
+        <h1>Entre em Contato</h1>
+        <form>
+            <label for="name">Nome</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Mensagem</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <!-- Botão de Enviar com a mesma cor do botão de Voltar -->
+            <button type="submit" class="submit-button">Enviar</button>
+        </form>
+        
+        <div class="contact-info">
+            <p><i class="fas fa-phone"></i> +55 11 1234-5678</p>
+            <p><i class="fas fa-envelope"></i> Lojadomatias@gmail.com</p>
+            <p><i class="fas fa-map-marker-alt"></i> Rua do Matias, 123, Campinas, SP, Brasil</p>
+        </div>
+    </div>
+
+    <style>
+        /* Estilos do botão de voltar */
+        .back-button {
+            background-color: #0040b6; /* Azul */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            z-index: 1000; /* Garante que o botão fique acima de outros elementos */
+        }
+
+        .back-button:hover {
+            background-color: #0040b6;
+        }
+
+        .back-button i {
+            margin-right: 8px;
+        }
+
+        /* Estilos para o botão de Enviar */
+        .submit-button {
+            background-color: #0040b6; /* Mesma cor do botão de voltar */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background-color: #00b5c6;
+        }
+    </style>
+</body>
+</html>
